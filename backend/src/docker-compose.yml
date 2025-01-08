@@ -1,0 +1,9 @@
+services:
+  testcontainers.api:
+    image: testcontainersapi
+    build:
+      context: .
+      dockerfile: TestContainers.Api/Dockerfile
+    ports:
+      - 3000:3000
+      - 3001:3001

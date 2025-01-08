@@ -1,0 +1,34 @@
+services:
+  testcontainers.api:
+    image: testcontainersapi
+    container_name: testcontainers.api
+    build:
+      context: .
+      dockerfile: TestContainers.Api/Dockerfile
+    ports:
+      - 3000:3000
+      - 3001:3001
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=3000
+      - ASPNETCORE_HTTPS_PORTS=3001
+      - ASPNETCORE_URLS=https://+:3001;http://+:3000
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password # (1)
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx # (1)
+    volumes:
+      - ~/.aspnet/https:/https:ro # (1)
+
+  testcontainers.database:
+    image: postgres:latest
+    container_name: testcontainers.database
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=blogdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./.containers/blog-db:/var/lib/postgresql/data
+
+
+## (1) : For MacOS, Linux or Windows using Linux containers
