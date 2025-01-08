@@ -1,0 +1,133 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "TestContainers.Api | v1",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/articles/{id}": {
+      "get": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "Retrieve an article by id",
+        "operationId": "GetArticleById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Article"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/articles": {
+      "post": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "Create a new article",
+        "operationId": "CreateArticle",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateArticleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Article": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "isDraft": {
+            "type": "boolean"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "CreateArticleRequest": {
+        "required": [
+          "title",
+          "author",
+          "content",
+          "isDraft"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "The title of the article"
+          },
+          "author": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "The name of the author"
+          },
+          "content": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "The content of the article"
+          },
+          "isDraft": {
+            "type": "boolean",
+            "description": "Whether the article is in draft mode or not"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Articles"
+    }
+  ]
+}
