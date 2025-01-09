@@ -7,8 +7,8 @@ namespace TestContainers.IntegrationTests;
 
 public abstract class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory>
 {
-    protected readonly ISender Sender;
-    protected readonly ApplicationDbContext DbContext;
+    protected ISender Sender { get; }
+    protected ApplicationDbContext DbContext { get; }
     
     protected BaseIntegrationTest(IntegrationTestWebAppFactory factory)
     {
