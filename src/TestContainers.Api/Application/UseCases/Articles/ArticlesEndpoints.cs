@@ -30,9 +30,9 @@ public static class ArticlesEndpoints
         [FromServices] ISender sender,
         CancellationToken cancellationToken)
     {
-        var command = new GetArticleByIdCommand(id);
+        var query = new GetArticleByIdQuery(id);
 
-        var article = await sender.Send(command, cancellationToken);
+        var article = await sender.Send(query, cancellationToken);
 
         return article is null ? TypedResults.NotFound() : TypedResults.Ok(article);
     }
