@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{94E51777
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestContainers.IntegrationTests", "tests\TestContainers.IntegrationTests\TestContainers.IntegrationTests.csproj", "{78BE7F12-EF81-4EF3-B1CC-FE4C8BEB1B3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestContainers.UnitTests", "TestContainers.UnitTests\TestContainers.UnitTests.csproj", "{DFC70051-4AC6-48B2-A12C-D3244879FE51}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,9 +34,14 @@ Global
 		{78BE7F12-EF81-4EF3-B1CC-FE4C8BEB1B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78BE7F12-EF81-4EF3-B1CC-FE4C8BEB1B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78BE7F12-EF81-4EF3-B1CC-FE4C8BEB1B3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFC70051-4AC6-48B2-A12C-D3244879FE51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC70051-4AC6-48B2-A12C-D3244879FE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC70051-4AC6-48B2-A12C-D3244879FE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC70051-4AC6-48B2-A12C-D3244879FE51}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E2672C0E-2338-4C01-BD27-F3CD3AB40DAD} = {0770680B-24D7-4690-985E-A1C37755EFC6}
 		{78BE7F12-EF81-4EF3-B1CC-FE4C8BEB1B3C} = {94E51777-ED2F-4911-8A41-33FD26DA1A71}
+		{DFC70051-4AC6-48B2-A12C-D3244879FE51} = {94E51777-ED2F-4911-8A41-33FD26DA1A71}
 	EndGlobalSection
 EndGlobal
