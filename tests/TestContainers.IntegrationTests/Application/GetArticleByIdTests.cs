@@ -1,11 +1,23 @@
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using TestContainers.Api.Application.UseCases.Articles.CreateArticle;
 using TestContainers.Api.Application.UseCases.Articles.GetArticleById;
 using Xunit;
 
 namespace TestContainers.IntegrationTests.Application;
 
-public class GetArticleByIdTests(IntegrationTestWebAppFactory factory) : BaseIntegrationTest(factory)
+[Collection(nameof(IntegrationTestCollectionDefinition))]
+public class GetArticleByIdTests
 {
+    private readonly ISender _sender;
+    
+    public GetArticleByIdTests(IntegrationTestWebAppFactory factory)
+    {
+        var scope = factory.Services.CreateScope();
+        
+        _sender = scope.ServiceProvider.GetRequiredService<ISender>();
+    }  
+    
     [Fact]
     public async Task GetById_ShouldReturnArticle_WhenArticleExists()
     {
@@ -16,11 +28,11 @@ public class GetArticleByIdTests(IntegrationTestWebAppFactory factory) : BaseInt
             "This is an article about test containers",
             false);
         
-        var articleId = await Sender.Send(command);
+        var articleId = await _sender.Send(command);
         var query = new GetArticleByIdQuery(articleId);
         
         // Act
-        var article = await Sender.Send(query);
+        var article = await _sender.Send(query);
         
         // Asset
         Assert.NotNull(article);

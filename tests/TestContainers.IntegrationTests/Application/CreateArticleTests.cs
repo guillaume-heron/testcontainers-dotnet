@@ -1,10 +1,25 @@
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using TestContainers.Api.Application.UseCases.Articles.CreateArticle;
+using TestContainers.Api.Infrastructure.Database;
 using Xunit;
 
 namespace TestContainers.IntegrationTests.Application;
 
-public class CreateArticleTests(IntegrationTestWebAppFactory factory) : BaseIntegrationTest(factory)
+[Collection(nameof(IntegrationTestCollectionDefinition))]
+public class CreateArticleTests
 {
+    private readonly ISender _sender;
+    private readonly ApplicationDbContext _dbContext;
+    
+    public CreateArticleTests(IntegrationTestWebAppFactory factory)
+    {
+        var scope = factory.Services.CreateScope();
+        
+        _sender = scope.ServiceProvider.GetRequiredService<ISender>();
+        _dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    }  
+    
     [Fact]
     public async Task Create_ShouldAddNewArticle_WhenCommandIsValid()
     {
@@ -16,10 +31,10 @@ public class CreateArticleTests(IntegrationTestWebAppFactory factory) : BaseInte
             false);
         
         // Act
-        var articleId = await Sender.Send(command);
+        var articleId = await _sender.Send(command);
         
         // Asset
-        var article = DbContext.Articles.FirstOrDefault(a => a.Id == articleId);
+        var article = _dbContext.Articles.FirstOrDefault(a => a.Id == articleId);
         
         Assert.NotNull(article);
     }
