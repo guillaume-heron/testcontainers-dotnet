@@ -33,6 +33,10 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
     public async Task InitializeAsync()
     {
         await _dbContainer.StartAsync();
+        
+        var dbMigrationScript = await File.ReadAllTextAsync("db_migration_script.sql");
+
+        await _dbContainer.ExecScriptAsync(dbMigrationScript);
     }
     
     public new async Task DisposeAsync()
