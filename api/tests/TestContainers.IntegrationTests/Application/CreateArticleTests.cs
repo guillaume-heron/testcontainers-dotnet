@@ -1,13 +1,13 @@
 using TestContainers.Api.Application.UseCases.Articles.CreateArticle;
-using TestContainers.Api.Application.UseCases.Articles.GetArticleById;
+using TestContainers.IntegrationTests.Configuration;
 using Xunit;
 
 namespace TestContainers.IntegrationTests.Application;
 
-public class GetArticleByIdTests(IntegrationTestWebAppFactory factory) : IntegrationTestBase(factory)
+public class CreateArticleTests(IntegrationTestWebAppFactory factory) : IntegrationTestBase(factory)
 {
     [Fact]
-    public async Task GetById_ShouldReturnArticle_WhenArticleExists()
+    public async Task Create_ShouldAddNewArticle_WhenCommandIsValid()
     {
         // Arrange
         var command = new CreateArticleCommand(
@@ -16,13 +16,12 @@ public class GetArticleByIdTests(IntegrationTestWebAppFactory factory) : Integra
             "This is an article about test containers",
             false);
         
-        var articleId = await Sender.Send(command);
-        var query = new GetArticleByIdQuery(articleId);
-        
         // Act
-        var article = await Sender.Send(query);
+        var articleId = await Sender.Send(command);
         
         // Asset
+        var article = DbContext.Articles.FirstOrDefault(a => a.Id == articleId);
+        
         Assert.NotNull(article);
     }
 }

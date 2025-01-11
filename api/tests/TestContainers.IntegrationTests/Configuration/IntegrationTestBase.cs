@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TestContainers.Api.Infrastructure.Database;
 using Xunit;
 
-namespace TestContainers.IntegrationTests;
+namespace TestContainers.IntegrationTests.Configuration;
 
 [Collection(nameof(IntegrationTestCollectionDefinition))]
 public abstract class IntegrationTestBase

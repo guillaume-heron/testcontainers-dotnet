@@ -1,0 +1,45 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - api/**
+      - .github/workflows/build.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - api/**
+      - .github/workflows/build.yml
+
+env:
+  DOTNET_VERSION: "9.x"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: "./api"
+
+    steps:
+      - name: "Checkout Github Action"
+        uses: actions/checkout@v4
+
+      - name: "Setup .NET ${{ env.DOTNET_VERSION }}"
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: "Restore"
+        run: dotnet restore ./TestContainers.sln
+
+      - name: "Build"
+        run: dotnet build ./TestContainers.sln --configuration Release --no-restore
+
+      - name: "Test"
+        run: dotnet test ./TestContainers.sln  --configuration Release --no-restore --no-build --verbosity normal
