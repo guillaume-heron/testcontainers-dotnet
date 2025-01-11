@@ -17,11 +17,11 @@ This example project demonstrates how to:
 - Set up a fully functionnal .NET 9 CRUD Web API.
     - Use minimal API
     - Implement Generic Repository pattern with EF Core
-    - Use Docker Compose to define and manage multi-container Docker applications.
     - Expose OpenAPI documentation, making it easy to understand and interact with the services.
+- Use Docker Compose to define and manage multi-container Docker applications.
 - Use Testcontainers to spin up Docker containers during tests.
     - Perform integration tests against the containerized services
-    - Configure Github Actions to run integration tests in CI/CD pipeline
+- Configure Github Actions to run integration tests in CI/CD pipeline
 
 
 ## 📁 Project Structure
@@ -71,7 +71,7 @@ dotnet test
 This command will run all defined tests in our solution:
 
 - **Unit tests**
-- **Integration tests**, which spin up a PostgreSQL database inside a Docker container using TestContainers
+- **Integration tests**, which spin up a PostgreSQL database inside a Docker container using Testcontainers
 
 ## 🔗 Useful Resources
 

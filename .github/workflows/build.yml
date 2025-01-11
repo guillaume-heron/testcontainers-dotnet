@@ -30,7 +30,7 @@ jobs:
       - name: "Checkout Github Action"
         uses: actions/checkout@v4
 
-      - name: "Setup .NET ${{ env.DOTNET_VERSION }}"
+      - name: "Setup .NET"
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
