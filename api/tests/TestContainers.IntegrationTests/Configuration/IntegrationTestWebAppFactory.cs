@@ -8,7 +8,7 @@ using TestContainers.Api.Infrastructure.Database;
 using Testcontainers.PostgreSql;
 using Xunit;
 
-namespace TestContainers.IntegrationTests;
+namespace TestContainers.IntegrationTests.Configuration;
 
 public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
@@ -34,7 +34,7 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
     {
         await _dbContainer.StartAsync();
         
-        var dbMigrationScript = await File.ReadAllTextAsync("db_migration_script.sql");
+        var dbMigrationScript = await File.ReadAllTextAsync("Configuration/db_migration_script.sql");
 
         await _dbContainer.ExecScriptAsync(dbMigrationScript);
     }
