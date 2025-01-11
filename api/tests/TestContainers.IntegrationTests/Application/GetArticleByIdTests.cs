@@ -1,4 +1,3 @@
-using TestContainers.Api.Application.UseCases.Articles.CreateArticle;
 using TestContainers.Api.Application.UseCases.Articles.GetArticleById;
 using TestContainers.IntegrationTests.Configuration;
 using Xunit;
@@ -11,19 +10,31 @@ public class GetArticleByIdTests(IntegrationTestWebAppFactory factory) : Integra
     public async Task GetById_ShouldReturnArticle_WhenArticleExists()
     {
         // Arrange
-        var command = new CreateArticleCommand(
-            "Test containers",
-            "Guillaume H.",
-            "This is an article about test containers",
-            false);
+        var random = new Random();
+        var index = random.Next(0, Seeder.ArticlesCount);
+        var dbArticle = Seeder.GetExistingArticle(index);
         
-        var articleId = await Sender.Send(command);
-        var query = new GetArticleByIdQuery(articleId);
+        var query = new GetArticleByIdQuery(dbArticle.Id);
         
         // Act
         var article = await Sender.Send(query);
         
         // Asset
         Assert.NotNull(article);
+        Assert.Equal(dbArticle.Id, article.Id);
+    }
+    
+    [Fact]
+    public async Task GetById_ShouldReturnNull_WhenArticleDoesNotExist()
+    {
+        // Arrange
+        var dummyId = Guid.NewGuid();
+        var query = new GetArticleByIdQuery(dummyId);
+        
+        // Act
+        var article = await Sender.Send(query);
+        
+        // Asset
+        Assert.Null(article);
     }
 }
