@@ -6,7 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0770680B-24D7-4690-985E-A1C37755EFC6}"
 	ProjectSection(SolutionItems) = preProject
 		src\docker-compose.debug.yml = src\docker-compose.debug.yml
-		src\docker-compose.yml = src\docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestContainers.Api", "src\TestContainers.Api\TestContainers.Api.csproj", "{E2672C0E-2338-4C01-BD27-F3CD3AB40DAD}"

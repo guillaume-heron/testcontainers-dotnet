@@ -36,7 +36,6 @@ testcontainers-dotnet/
 │    │   ├── TestContainers.Api
 │    │   ├── .dockerignore
 │    │   ├── docker-compose.debug.yml
-│    │   └── docker-compose.yml
 │    ├── tests
 │    │   ├── TestContainers.IntegrationTests
 │    │   └── TestContainers.UnitTests
@@ -57,10 +56,12 @@ dotnet build
 ### Run the API
 
 ```bash
-docker-compose -f "docker-compose.debug.yml" up -d
+docker compose -f "docker-compose.debug.yml" up -d
 ```
 
 It will start the services defined in the <code>docker-compose.debug.yml</code> file, including a .Net 9 Web API and a PostgreSQL database, in detached mode, with each service running inside its own Docker container.
+
+This docker-compose file contain some configuration for https support (see [Hosting ASP.NET Core images with Docker Compose over HTTPS](https://learn.microsoft.com/en-us/aspnet/core/security/docker-compose-https?view=aspnetcore-9.0))
 
 ### Run all tests
 
