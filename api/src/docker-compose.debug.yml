@@ -31,4 +31,4 @@ services:
       - ./.containers/blog-db:/var/lib/postgresql/data
 
 
-## (1) : For MacOS, Linux or Windows using Linux containers
+## (1) : For MacOS, Linux or Windows using Linux containers : Hosting ASP.NET Core images with Docker Compose over HTTPS
