@@ -38,6 +38,62 @@
             "description": "Not Found"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "Update an existing article",
+        "operationId": "UpdateArticle",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateArticleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Articles"
+        ],
+        "summary": "Delete an existing article",
+        "operationId": "DeleteArticle",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
       }
     },
     "/articles": {
@@ -94,6 +150,36 @@
         }
       },
       "CreateArticleRequest": {
+        "required": [
+          "title",
+          "author",
+          "content",
+          "isDraft"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "The title of the article"
+          },
+          "author": {
+            "maxLength": 100,
+            "type": "string",
+            "description": "The name of the author"
+          },
+          "content": {
+            "maxLength": 500,
+            "type": "string",
+            "description": "The content of the article"
+          },
+          "isDraft": {
+            "type": "boolean",
+            "description": "Whether the article is in draft mode or not"
+          }
+        }
+      },
+      "UpdateArticleRequest": {
         "required": [
           "title",
           "author",

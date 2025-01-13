@@ -18,7 +18,7 @@ public class CreateArticleTests
 
         var command = new CreateArticleCommand(
             Title: "Test containers",
-            Author: "Guillaume H.",
+            Author: "John Doe",
             Content: "This is an article about test containers",
             IsDraft: true);
 
@@ -40,7 +40,7 @@ public class CreateArticleTests
 
         var command = new CreateArticleCommand(
             Title: "Test containers",
-            Author: "Guillaume H.",
+            Author: "John Doe",
             Content: "This is an article about test containers",
             IsDraft: true);
 

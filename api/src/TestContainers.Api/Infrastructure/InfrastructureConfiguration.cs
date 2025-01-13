@@ -15,6 +15,14 @@ public static class InfrastructureConfiguration
         return services;
     }
 
+    public static void ApplyDatabaseMigrations(this IApplicationBuilder app)
+    {
+        using var serviceScope = app.ApplicationServices.CreateScope();
+        using var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        
+        dbContext.Database.Migrate();
+    }
+
     private static IServiceCollection ConfigureDatabase(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection") 

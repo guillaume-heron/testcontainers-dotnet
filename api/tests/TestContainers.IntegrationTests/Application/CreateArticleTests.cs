@@ -12,7 +12,7 @@ public class CreateArticleTests(IntegrationTestWebAppFactory factory) : Integrat
         // Arrange
         var command = new CreateArticleCommand(
             "Test containers",
-            "Guillaume H.",
+            "John Doe",
             "This is an article about test containers",
             false);
         

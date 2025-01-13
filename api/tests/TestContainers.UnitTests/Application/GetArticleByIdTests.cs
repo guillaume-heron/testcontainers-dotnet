@@ -35,7 +35,7 @@ public class GetArticleByIdTests
         var articleRepositoryMock = Substitute.For<IArticleRepository>();
         var handler = new GetArticleByIdQueryHandler(articleRepositoryMock);
         
-        var article = Article.Create("Integration testing in .Net", "Guillaume H.", "...", true);
+        var article = Article.Create("Integration testing in .Net", "John Doe", "...", true);
         var command = new GetArticleByIdQuery(article.Id);
         
         articleRepositoryMock
@@ -56,7 +56,7 @@ public class GetArticleByIdTests
         var articleRepositoryMock = Substitute.For<IArticleRepository>();
         var handler = new GetArticleByIdQueryHandler(articleRepositoryMock);
         
-        var article = Article.Create("Integration testing in .Net", "Guillaume H.", "...", true);
+        var article = Article.Create("Integration testing in .Net", "John Doe", "...", true);
         var command = new GetArticleByIdQuery(article.Id);
         
         articleRepositoryMock

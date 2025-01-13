@@ -10,9 +10,7 @@ public class GetArticleByIdTests(IntegrationTestWebAppFactory factory) : Integra
     public async Task GetById_ShouldReturnArticle_WhenArticleExists()
     {
         // Arrange
-        var random = new Random();
-        var index = random.Next(0, Seeder.ArticlesCount);
-        var dbArticle = Seeder.GetExistingArticle(index);
+        var dbArticle = Seeder.GetRandomArticle();
         
         var query = new GetArticleByIdQuery(dbArticle.Id);
         
