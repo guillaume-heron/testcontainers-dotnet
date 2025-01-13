@@ -14,6 +14,6 @@ public sealed class GetArticleByIdQueryHandler : IRequestHandler<GetArticleByIdQ
 
     public async Task<Article?> Handle(GetArticleByIdQuery query, CancellationToken cancellationToken)
     {
-        return await _articleRepository.GetByIdAsync(query.Id);
+        return await _articleRepository.GetByIdAsync(query.Id, cancellationToken);
     }
 }

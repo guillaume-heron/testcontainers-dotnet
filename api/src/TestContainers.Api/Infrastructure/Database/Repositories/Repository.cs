@@ -11,13 +11,23 @@ public abstract class Repository<TEntity>  where TEntity : BaseEntity
         DbContext = dbContext;
     }
 
-    public async Task<TEntity?> GetByIdAsync(Guid id)
+    public async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await DbContext.Set<TEntity>().FindAsync(id);
+        return await DbContext.Set<TEntity>().FindAsync([id], cancellationToken);
     }
 
     public void Add(TEntity entity)
     {
         DbContext.Set<TEntity>().Add(entity);
+    }
+
+    public void Update(TEntity entity)
+    {
+        DbContext.Set<TEntity>().Update(entity);
+    }
+
+    public void Delete(TEntity entity)
+    {
+        DbContext.Set<TEntity>().Remove(entity);
     }
 }

@@ -21,8 +21,13 @@ public sealed class DatabaseSeeder
         await _dbContext.SaveChangesAsync();
     }
     
-    public Article GetExistingArticle(int index = 0) => _articles[index];
-    public int ArticlesCount => _articles.Count;
+    public Article GetRandomArticle()
+    {
+        var random = new Random();
+        var index = random.Next(0, _articles.Count);
+        
+        return _articles[index];
+    }
 
     
     #region Private methods

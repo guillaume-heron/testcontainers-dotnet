@@ -12,6 +12,11 @@ builder.Services
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.ApplyDatabaseMigrations();
+}
+
 app.MapOpenApi();
 app.UseHttpsRedirection();
 
